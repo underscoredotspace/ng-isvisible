@@ -7,7 +7,7 @@
 <body ng-controller="onScreenCtrl">
   <div class="frame">
     <div class="listouter">
-      <div class="listitem" data-ng-class="{'outview': !item.isVisible, 'seen': item.seen}" ng-repeat="item in items" id="{{'item-' + item.index}}">{{item.title}}</div>
+      <div class="listitem" data-ng-class="{'outview': !isVisible, 'seen': seen}" ng-repeat="item in items" id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
     </div>
   </div>
   <script src="script.js"></script>

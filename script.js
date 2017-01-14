@@ -4,8 +4,6 @@ angular.module("onScreenApp", [])
   $scope.items = [];
   for (i = 1; i <= 300; i++) {
     $scope.items.push({
-      "title": "Mambo number " + i,
-      "index": i,
       "seen": false
     });
   }
@@ -18,7 +16,7 @@ angular.module("onScreenApp", [])
       return {
         post: function(scope, element, attributes) {
           var ngVisO = {
-          _timer: null,
+            _timer: null,
             _delay: 300,
             _check: function() {
               scope.$broadcast('scrolled', element[0]);
@@ -27,12 +25,12 @@ angular.module("onScreenApp", [])
             check: function(e, p) {
               var self = this;
               if (this._timer) {
-                  clearTimeout(this._timer);
-                  this._timer = null;
+                clearTimeout(this._timer);
+                this._timer = null;
               }
               this._timer = setTimeout(function() {
-                  self._check(e, p);
-                  self._timer = null;
+                self._check(e, p);
+                self._timer = null;
               }, this._delay);
             }
           }
@@ -50,10 +48,10 @@ angular.module("onScreenApp", [])
   return {
     restrict: "C",
     controller: function($scope) {
-      $scope.item.visible = function(isVisible) {
-        $scope.item.isVisible = isVisible;
+      $scope.visible = function(isVisible) {
+        $scope.isVisible = isVisible;
         if (isVisible) {
-          $scope.item.seen = true;
+          $scope.seen = true;
         }
       }
     },
@@ -64,10 +62,10 @@ angular.module("onScreenApp", [])
             check: function(e, p) {
               eTop = e.offsetTop;
               eBot = e.offsetTop + e.offsetHeight;
-              sTop = p.scrollTop;
-              sBot = p.clientHeight + p.scrollTop;
+              pTop = p.scrollTop;
+              pBot = p.clientHeight + p.scrollTop;
 
-              scope.item.visible((eTop >= sTop) && (eBot <= sBot));
+              scope.visible((eTop >= pTop) && (eBot <= pBot));
             }
           }
 
