@@ -5,10 +5,10 @@ angular.module('ngIsVisible', [])
     compile: function() {
       return {
         post: function(scope, element, attrs) {
-          var ngVisO = {
+          var ngVis = {
             _timer: null,
             _delay: Number(attrs.visDelay) || 300,
-            _check: function() {
+            _scrolled: function() {
               scope.$broadcast('scrolled', element[0]);
               scope.$digest();
             },
@@ -19,52 +19,49 @@ angular.module('ngIsVisible', [])
                 this._timer = null;
               }
               this._timer = setTimeout(function() {
-                self._check(e, p);
+                self._scrolled(e, p);
                 self._timer = null;
               }, this._delay);
             }
           }
           angular.element($window).bind('resize', function() {
-            ngVisO.check();
+            ngVis.check();
           })
           element.bind('scroll', function () {
-            ngVisO.check();
+            ngVis.check();
           });
           scope.$on('destroy', function(e) {
               clearTimeout(this._timer);
-              element.off('scroll')
           });
-          ngVisO.check();
+          ngVis.check();
         }
       }
     }
   };
 })
 
-.directive('visInner', function($compile) {
+.directive('visInner', function() {
   return {
     restrict: 'A',
     compile: function() {
       return {
         pre: function(scope, elem, attrs) {
-          var ngVisI = {
-            check: function(e, p) {
-              eTop = e.offsetTop;
-              eBot = e.offsetTop + e.offsetHeight;
-              pTop = p.scrollTop;
-              pBot = p.clientHeight + p.scrollTop;;
-              visible = (eTop >= pTop) && (eBot <= pBot);
-              scope.$emit('visible', visible);
+          function check(e, p) {
+            eTop = e.offsetTop;
+            eBot = e.offsetTop + e.offsetHeight;
+            pTop = p.scrollTop;
+            pBot = p.clientHeight + p.scrollTop;;
+            visible = (eTop >= pTop) && (eBot <= pBot);
+            scope.$emit('visible', visible);
 
-              if (visible && attrs.visRemove=="true") {
-                scope.visSeen = true;
-              }
+            if (visible && attrs.visRemove=="true") {
+              scope.visSeen = true;
             }
           }
 
           scope.$on('scrolled', function(ev, p) {
-            if (!scope.visSeen) {
-              ngVisI.check(elem[0], p);
+            if (!scope.visSeen || !attrs.visRemove=="true") {
+              check(elem[0], p);
             }
           });
         }

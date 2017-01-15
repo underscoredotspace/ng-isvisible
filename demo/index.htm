@@ -6,7 +6,7 @@
 </head>
 
 <body ng-controller="onScreenCtrl">
-  <div  vis-outer class="listouter">
+  <div vis-outer class="listouter">
     <div vis-inner class="listitem" data-ng-class="{'outview': !isVisible, 'seen': seen}" 
       ng-repeat="item in items" id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
   </div>
