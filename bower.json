@@ -1,0 +1,21 @@
+{
+  "name": "ng-isvisible",
+  "authors": [
+    "Colin Tindle <ampersand@underscore.space>"
+  ],
+  "description": "Angular directives to allow you detect if a DOM element is in view",
+  "main": "src/ngIsVisible.js",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "lazy",
+    "lazyload",
+    "lazy-load"
+  ],
+  "license": "Creative Commons Attribution-NonCommercial 4.0 International License",
+  "homepage": "github.com/underscoredotpsace/angular-isvisible",
+  "private": true,
+  "dependencies": {
+    "angularjs": "latest"
+  }
+}

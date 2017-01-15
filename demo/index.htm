@@ -1,0 +1,41 @@
+<html ng-app="onScreenApp">
+<head>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <script src="../bower_components/angularjs/angular.min.js"></script>
+  <script src="../src/ngIsVisible.js"></script>
+</head>
+
+<body ng-controller="onScreenCtrl">
+  <div  vis-outer class="listouter">
+    <div vis-inner class="listitem" data-ng-class="{'outview': !isVisible, 'seen': seen}" 
+      ng-repeat="item in items" id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
+  </div>
+
+  <script>
+    angular.module('onScreenApp', ['ngIsVisible'])
+
+    .controller('onScreenCtrl', function($scope) {
+      $scope.items = [];
+      for (i = 1; i <= 300; i++) {
+        $scope.items.push({
+          'seen': false
+        });
+      }
+    })
+    .directive('listitem', function() {
+      return {
+        restrict: 'C',
+        controller: function($scope) {
+          $scope.$on('visible', function(ev, isVisible) {
+            $scope.isVisible = isVisible;
+            if (isVisible) {
+              $scope.seen = true;
+            }
+          });
+        }
+      }
+    });
+</script>
+</body>
+
+</html>

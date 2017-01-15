@@ -1,23 +1,13 @@
-angular.module("onScreenApp", [])
-
-.controller("onScreenCtrl", function($scope) {
-  $scope.items = [];
-  for (i = 1; i <= 300; i++) {
-    $scope.items.push({
-      "seen": false
-    });
-  }
-})
-
-.directive('listouter', function() {
+angular.module('ngIsVisible', [])
+.directive('visOuter', function($window) {
   return {
-    restrict: 'C',
+    restrict: 'A',
     compile: function() {
       return {
-        post: function(scope, element, attributes) {
+        post: function(scope, element, attrs) {
           var ngVisO = {
             _timer: null,
-            _delay: 300,
+            _delay: Number(attrs.visDelay) || 300,
             _check: function() {
               scope.$broadcast('scrolled', element[0]);
               scope.$digest();
@@ -34,8 +24,15 @@ angular.module("onScreenApp", [])
               }, this._delay);
             }
           }
+          angular.element($window).bind('resize', function() {
+            ngVisO.check();
+          })
           element.bind('scroll', function () {
             ngVisO.check();
+          });
+          scope.$on('destroy', function(e) {
+              clearTimeout(this._timer);
+              element.off('scroll')
           });
           ngVisO.check();
         }
@@ -44,17 +41,9 @@ angular.module("onScreenApp", [])
   };
 })
 
-.directive("listitem", function() {
+.directive('visInner', function($compile) {
   return {
-    restrict: "C",
-    controller: function($scope) {
-      $scope.visible = function(isVisible) {
-        $scope.isVisible = isVisible;
-        if (isVisible) {
-          $scope.seen = true;
-        }
-      }
-    },
+    restrict: 'A',
     compile: function() {
       return {
         pre: function(scope, elem, attrs) {
@@ -63,17 +52,20 @@ angular.module("onScreenApp", [])
               eTop = e.offsetTop;
               eBot = e.offsetTop + e.offsetHeight;
               pTop = p.scrollTop;
-              pBot = p.clientHeight + p.scrollTop;
+              pBot = p.clientHeight + p.scrollTop;;
+              visible = (eTop >= pTop) && (eBot <= pBot);
+              scope.$emit('visible', visible);
 
-              scope.visible((eTop >= pTop) && (eBot <= pBot));
+              if (visible && attrs.visRemove=="true") {
+                scope.visSeen = true;
+              }
             }
           }
 
           scope.$on('scrolled', function(ev, p) {
+            if (!scope.visSeen) {
               ngVisI.check(elem[0], p);
-          });
-          scope.$on("destroy", function(e) {
-              clearTimeout(this._timer);
+            }
           });
         }
       }
