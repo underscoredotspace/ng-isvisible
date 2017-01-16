@@ -1,6 +1,6 @@
 #ng-isvisible
 
-Angular plug-in(?) to detect when DOM elements move in or out of view.
+Angular 1.x component to detect when DOM elements move in or out of view.
 
 ##Usage
 Add `src/ng-isVisible.js` into your main document. In the outer DIV add attribute `vis-outer` and `vis-inner` to the inner list elements. For example: 
@@ -44,7 +44,7 @@ The delay between scroll and update can be altered from the default 300ms by add
 
 ##Limitations
 - Could probably still be faster
-- vis-outer can't be used with window object. Workaround to create a DIV of 100vw * 100vh as scrollable frame.
+- `vis-outer` can't be used with window object. Workaround to create a DIV of 100vw * 100vh as scrollable frame.
 
 ##TODO
 - Better documetation

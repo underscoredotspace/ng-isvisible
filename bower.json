@@ -13,7 +13,7 @@
     "lazy-load"
   ],
   "license": "Creative Commons Attribution-NonCommercial 4.0 International License",
-  "homepage": "github.com/underscoredotpsace/angular-isvisible",
+  "homepage": "https://github.com/underscoredotpsace/angular-isvisible",
   "private": true,
   "dependencies": {
     "angularjs": "latest"
