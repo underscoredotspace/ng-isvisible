@@ -12,10 +12,10 @@
     "lazyload",
     "lazy-load"
   ],
-  "license": "Creative Commons Attribution-NonCommercial 4.0 International License",
-  "homepage": "https://github.com/underscoredotpsace/angular-isvisible",
+  "license": "CC-BY-NC-4.0",
+  "homepage": "https://github.com/underscoredotpsace/ng-isvisible",
   "private": true,
   "dependencies": {
-    "angularjs": "latest"
+    "angularjs": "^1.6.x"
   }
 }
