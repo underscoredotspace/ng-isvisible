@@ -1,7 +1,7 @@
 {
   "name": "ng-isvisible",
   "authors": [
-    "Colin Tindle <ampersand@underscore.space>"
+    "Colin Tindle <ampersand@underscore.space> (https://underscore.space)"
   ],
   "description": "Angular directives to allow you detect if a DOM element is in view",
   "main": "src/ngIsVisible.js",
@@ -17,5 +17,6 @@
   "private": false,
   "dependencies": {
     "angularjs": "^1.6.x"
-  }
+  },
+  "ignore": ["node_modules", "bower_components"]
 }

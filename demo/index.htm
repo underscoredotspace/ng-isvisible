@@ -2,25 +2,21 @@
 <head>
   <link href="style.css" rel="stylesheet" type="text/css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-  <script src="../src/ngIsVisible.js"></script>
+  <script src="../src/ng-isvisible.js"></script>
 </head>
 
 <body ng-controller="demoCtrl">
   <div vis-outer class="listouter">
     <div vis-inner class="listitem" data-ng-class="{'outview': !isVisible, 'seen': seen}" 
-      ng-repeat="item in items" id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
+      ng-repeat="item in mambo track by $index" id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
   </div>
 
   <script>
     angular.module('demoApp', ['ngIsVisible'])
 
     .controller('demoCtrl', function($scope) {
-      $scope.items = [];
-      for (i = 1; i <= 300; i++) {
-        $scope.items.push({
-          'seen': false
-        });
-      }
+      mambo = new Array(100);
+      $scope.mambo = mambo;
     })
     .directive('listitem', function() {
       return {
