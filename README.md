@@ -6,7 +6,7 @@ Angular 1.x component to detect when DOM elements move in or out of view.
 Available on Bower with `bower install ng-isvisible`. 
 
 ##Usage
-Add `bower_components/src/ng-isVisible.js` into your main document. In the outer DIV add attribute `vis-outer` and `vis-inner` to the inner list elements. Something like this: 
+Add `bower_components/src/ng-isVisible.js` into your main document. In the outer DIV add attribute `vis-outer` and `vis-inner` to the inner list elements. The `vis-outer` element **must** have a unique ID, or the visibility of inner elements will not be tracked. 
 
 ````html
 <head>
@@ -14,7 +14,7 @@ Add `bower_components/src/ng-isVisible.js` into your main document. In the outer
   <script src="../bower_components/ng-isvisible/src/ngIsVisible.js"></script>
 </head>
 <body>
-  <div vis-outer class="listouter"><!-- fixed height, with overflow-y: scroll -->
+  <div vis-outer class="listouter" id="col-1"><!-- fixed height, with overflow-y: scroll -->
     <div vis-inner class="listitem" data-ng-class="{'outview': !isVisible, 'seen': seen}" 
       ng-repeat="item in items" id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
   </div>
@@ -43,7 +43,7 @@ angular.module('yourAppName', ['ngIsVisible'])
 Please try out the [example] (https://underscoredotspace.github.io/ng-isvisible/demo/) in the demo folder. 
 
 ##Optional Attributes
-The delay between scroll and update can be altered from the default 300ms by adding `vis-delay="[ms]"` to the `vis-outer` element. You can also add `vis-remove="true"` to the inner elements if you never want the visble state to be set back to false if it has been seen already. This behaviour may slightly speed up running. 
+The delay between scroll and update can be altered from the default 300ms by adding `vis-delay="500"` (500ms) to the `vis-outer` element. You can also add `vis-remove="true"` to the inner elements if you never want the visble state to be set back to false if it has been seen already. This behaviour may slightly speed up running. 
 
 ##Limitations
 - Could probably still be faster

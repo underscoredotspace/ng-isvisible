@@ -60,8 +60,10 @@ angular.module('ngIsVisible', [])
           }
 
           scope.$on('scrolled', function(ev, p) {
-            if (!scope.visSeen || !attrs.visRemove=="true") {
-              check(elem[0], p);
+            if((elem[0].parentElement.id != "") && (elem[0].parentElement.id == p.id)) {
+              if (!scope.visSeen || !attrs.visRemove=="true") {
+                check(elem[0], p);
+              }
             }
           });
         }
