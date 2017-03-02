@@ -1,4 +1,5 @@
 <html ng-app="demoApp">
+
 <head>
   <link href="style.css" rel="stylesheet" type="text/css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
@@ -7,36 +8,16 @@
 
 <body ng-controller="demoCtrl">
   <div vis-outer class="listouter" id="col-1">
-    <div vis-inner class="listitem" data-ng-class="{'outview': !isVisible, 'seen': seen}" 
-      ng-repeat="item in mambo track by $index" id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
+    <div vis-inner class="listitem" data-ng-class="{'outview': !isVisible, 'seen': seen}" ng-repeat="item in mambo track by $index"
+      id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
   </div>
 
   <div vis-outer class="listouter" id="col-2">
-    <div vis-inner class="listitem" data-ng-class="{'outview': !isVisible, 'seen': seen}" 
-      ng-repeat="item in mambo track by $index" id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
+    <div vis-inner class="listitem" data-ng-class="{'outview': !isVisible, 'seen': seen}" ng-repeat="item in mambo track by $index"
+      id="{{'item-' + $index}}">{{'Mambo number ' + $index}}</div>
   </div>
 
-  <script>
-    angular.module('demoApp', ['ngIsVisible'])
-
-    .controller('demoCtrl', function($scope) {
-      mambo = new Array(100);
-      $scope.mambo = mambo;
-    })
-    .directive('listitem', function() {
-      return {
-        restrict: 'C',
-        link: function(scope, element) {
-          scope.$on('visible', function(ev, isVisible) {
-            scope.isVisible = isVisible;
-            if (isVisible) {
-              scope.seen = true;
-            }
-          });
-        }
-      }
-    });
-</script>
+  <script src="script.js"></script>
 </body>
 
 </html>
